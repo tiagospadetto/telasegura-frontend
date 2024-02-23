@@ -1,0 +1,7 @@
+.secure button {
+  background-color: #b31919;
+}
+
+.secure button:hover {
+    background-color: #ef2d2d;
+  }
