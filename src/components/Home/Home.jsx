@@ -1,35 +1,38 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import io from "socket.io-client";
-import "./Home.css";
+import { SOCKET_URL } from "../../config/Constants";
+import PropTypes from "prop-types"; // Importe PropTypes
 
-function Home({setSocket}) {
-
+function Home({ setSocket }) {
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
-    const socket = await io.connect('https://telasegura-backend-private.onrender.com')
-    
+  const handleSubmit = () => {
+    const socket = io.connect(SOCKET_URL);
+
     socket.emit("bloqueia", (response) => {
-      console.log(response.liberado); 
+      console.log(response.liberado);
 
       if (response.liberado) {
         navigate("/secure");
-      }else{
+      } else {
         navigate("/block");
       }
-
     });
 
-    setSocket(socket)
-  }
+    setSocket(socket);
+  };
 
   return (
     <div className="home">
       <h1>Bem vindo!</h1>
-      <button onClick={()=>handleSubmit()}>Acessar Tela Segura</button>
+      <button onClick={handleSubmit}>Acessar Tela Segura</button>
     </div>
   );
 }
+
+Home.propTypes = {
+  setSocket: PropTypes.func.isRequired,
+};
 
 export default Home;
