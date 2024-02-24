@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./SecureScreen.css";
 
 function SecureScreen({ socket }) {
-  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -12,19 +11,21 @@ function SecureScreen({ socket }) {
     } else {
       bloqueia();
     }
-  }, [socket]); 
+  }, [socket]);
 
   const handleSubmit = () => {
     socket.emit("liberatela", socket.id);
     navigate("/home");
   };
-  
-  const bloqueia = () => {
-    socket.emit("bloqueia", (response) => {
-      console.log(response.liberado);
 
-      if (response.destino !== "secure") {
-        navigate('/'+destino);
+  const bloqueia = () => {
+    socket.emit("verifica", (response) => {
+      console.log(response);
+      const dest = response.liberado;
+      console.log(dest);
+
+      if (dest !== "secure") {
+        navigate("/" + dest);
       }
     });
   };
