@@ -1,11 +1,22 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: { browser: true, es2020: true , jest: true},
+  globals: {
+    React: "writable", 
+    render: "readonly", 
+    fireEvent: "readonly", 
+    waitFor: "readonly", 
+    expect: "readonly", 
+    describe: "readonly", 
+    it: "readonly",
+    require: "readonly", 
+  },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
+    'plugin:react-hooks/recommended'
+    ,
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
