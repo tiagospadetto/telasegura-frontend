@@ -7,10 +7,9 @@ function BlockScreen({ socket }) {
   useEffect(() => {
     if (!socket) {
       navigate("/home");
-    }else{
+    } else {
       acessa();
     }
-
   }, [socket]);
 
   const acessa = async () => {
