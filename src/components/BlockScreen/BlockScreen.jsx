@@ -18,6 +18,15 @@ function BlockScreen({ socket }) {
     });
   };
 
+  const handleSubmit = () => {
+    liberaTela();
+  };
+
+  const liberaTela = () => {
+    socket.emit("liberaTelaBlock", socket.id);
+    navigate("/home");
+  };
+
   return (
     <div className="block">
       <h1>Desculpe! Existe outro usuário acessando a Tela Segura</h1>
@@ -25,7 +34,7 @@ function BlockScreen({ socket }) {
         Aguarde nessa tela, você será redirecionado assim que ela estiver livre
       </h2>
       <h2>Não deseja aguardar?</h2>
-      <button>Voltar para home</button>
+      <button onClick={handleSubmit}>Voltar para home</button>
     </div>
   );
 }
